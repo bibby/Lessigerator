@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Lessigerator</title>
+<style>
+body{
+	font-family:Arial;
+	letter-spacing:-0.09em;
+}
+
+.db{
+	color:darkblue;
+}
+
+.m75
+{
+	font-size:0.75em;
+}
+
+.m50
+{
+	font-size:0.5em;
+}
+
+.m30
+{
+	font-size:0.3em;
+}
+</style>
+<script type="text/javascript" language="javascript" src="Lessig.js"></script>
+<script type="text/javascript" language="javascript" src="/common/js/Color.js"></script>
+<script type="text/javascript" language="javascript">
+
+// reusable effect
+var invert = new SlideEffect({
+	backgroundColor:"black",
+	color:"white"
+});
+
+
+// used for filler on long strings, or to make text smaller
+var n = "&nbsp;";
+
+
+// convenience method
+function slide()
+{
+	var sl = new Slide();
+	for(var i=0; i<arguments.length; i++)
+		sl.addArg(arguments[i]);
+	return sl;
+}
+
+
+// Presentation
+Lessig.slides=[
+	slide( "right arrow" , "<p class='m30'>goes forward. left goes back. esc goes to the beginning</p>" ),
+	slide( "yay!", "again!" ),
+		
+	slide( "this is.." ),
+	slide( "<b class='db'>Lessig</b><em class='m75'>erator</em>"),
+	
+	slide( n,n,  "and <em>this</em> is" , n,n),
+	slide(
+		new Picture("http://www.freewebs.com/maybe_im_a_lion/chocoboX.jpg"),
+		"a chocobo"
+	),
+	slide( "wark", invert),
+	
+	
+	slide( n,n, "some sizing tests:" ,n,n),
+	slide(
+		"tiny",
+		"mediumish",
+		"not really that long"
+	),
+	slide(
+		n,
+		"some pretty long text if I do say so",
+		new Line("<small class='m50'>(worksforme)</small>", "gray")
+	),
+	
+	
+	slide(
+		n,n,
+		"a work in progress",
+		n,n,
+		invert
+	),
+	slide("that's all." , "<small class='m30'>( Ctrl+U time? )</small>")
+];
+</script>
+</head>
+
+<body>
+</body>
+</html>
