@@ -16,8 +16,8 @@ var Lessig={
 	{
 		if(!ImgSearch || !ImgSearch.data.api_key)
 		{
-			alert("you need a Flickr API key to use this feature.\nSee ImgSearch.js");
-			return;
+			// alert("you need a Flickr API key to use the flickr feature.\nSee Lessig_settings.js");
+			return new Picture();
 		}
 		
 		ImgSearch.get(txt);
