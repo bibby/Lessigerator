@@ -1,4 +1,4 @@
-/*
+	/*
 A Lessig Method presentation "slideware" object
 @author bibby <bibby@surfmerchants.com>
 */
@@ -8,13 +8,25 @@ var Lessig={
 	sli:0,
 	blankSlide:null,
 	screen:null,
+	show_progress:true,
 	
-	// long story. short version-> http://stackoverflow.com/questions/1053329/css-text-align-bug
-	fontOffset:0.76,
+	flickrs:[],
+	fli:0,
+	flickr:function(txt)
+	{
+		if(!ImgSearch || !ImgSearch.data.api_key)
+		{
+			alert("you need a Flickr API key to use this feature.\nSee ImgSearch.js");
+			return;
+		}
+		
+		ImgSearch.get(txt);
+		return new Picture( this.fli++ );
+	},
+	
 	defaults:{
 		backgroundColor:"white",
-		color:"black",
-		maxSize:200
+		color:"black"
 	},
 	
 	// escape key does what?  start | end
@@ -58,13 +70,15 @@ var Lessig={
 	{
 		this.clear();
 		if(this.slides[ this.sli ])
+		{
 			this.slides[ this.sli ].draw();
+			if(this.show_progress)
+				this.showProgress();
+		}
 		else
 			this.blankSlide.draw();
 		
 	},
-	
-	vp:{},
 	
 	init:function()
 	{
@@ -98,6 +112,9 @@ var Lessig={
 		
 		this.start();
 	},
+	
+	// viewport
+	vp:{},
 	// a found function
 	getViewport:function()
 	{
@@ -129,6 +146,32 @@ var Lessig={
 		
 		this.vp.w = viewportwidth;
 		this.vp.h = viewportheight;
+	},
+	
+	addSlides:function()
+	{
+		Util
+		.iterator(arguments)
+		.each(function(lessig)
+		{
+			if( this instanceof Slide )
+				lessig.slides.push(this);
+		}, this);
+	},
+	
+	showProgress:function()
+	{
+		var s = document.createElement('span');
+		s.innerHTML = "Slide "+(this.sli+1)+" of "+this.slides.length;
+		extend(s.style,{
+			position:'absolute',
+			top:"5px",
+			left:"5px",
+			fontSize:"14px",
+			zIndex:10
+		});
+		
+		Lessig.screen.appendChild(s);
 	}
 };
 
@@ -136,3 +179,4 @@ window.onload = function()
 {
 	Lessig.init();
 };
+

@@ -1,92 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <title>Lessigerator</title>
-<style>
-body{
-	font-family:Arial;
-	letter-spacing:-0.09em;
-}
-
-.db{
-	color:darkblue;
-}
-
-.m75
-{
-	font-size:0.75em;
-}
-
-.m50
-{
-	font-size:0.5em;
-}
-
-.m30
-{
-	font-size:0.3em;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="Lessig.css" />
 <script type="text/javascript" language="javascript" src="Lessig.js"></script>
 <script type="text/javascript" language="javascript">
 
-// reusable effect
-var invert = new SlideEffect({
-	backgroundColor:"black",
-	color:"white"
-});
-
-
-// used for filler on long strings, or to make text smaller
-var n = "&nbsp;";
-
-
 // convenience method
-function slide()
+function s()
 {
-	var sl = new Slide();
-	for(var i=0; i<arguments.length; i++)
-		sl.addArg(arguments[i]);
-	return sl;
+	var slide = new Slide();
+	Util
+	.iterator(arguments)
+	.each(function(s)
+	{
+		s.addArg(this);
+	},slide);
+	return slide;
 }
 
-
 // Presentation
-Lessig.slides=[
-	slide( "right arrow" , "<p class='m30'>goes forward. left goes back. esc goes to the beginning</p>" ),
-	slide( "yay!", "again!" ),
-		
-	slide( "this is.." ),
-	slide( "<b class='db'>Lessig</b><em class='m75'>erator</em>"),
+Lessig.addSlides(
+
+	// s()  is a shorthand for  new Slide()
 	
-	slide( n,n,  "and <em>this</em> is" , n,n),
-	slide(
-		new Picture("http://www.freewebs.com/maybe_im_a_lion/chocoboX.jpg"),
-		"a chocobo"
+	s("begin..", Util.html("by pressing right","smallest")),
+	
+	s("How long?"),
+	
+	s("last presentation"),
+	
+	s("hard part"),
+	s("designing"),
+	s("content"),
+	s("organizing"),
+	s("flow"),
+	
+	s("but how long.."),
+	s("software"),
+	s("( slideware )"),
+	s("building it?"),
+	
+	s( Util.html("what if ?","em small") ),
+	
+	
+	s("fast"),
+	s("cheap"),
+	s("easy"),
+	
+	s("same thing"),
+	s("less time"),
+	
+	s("this is.."),
+	
+	s( Util.cat(
+		Util.color(	Util.html("Lessig","bold"),	"darkblue"	),
+		Util.html("erator","em")
+	)),
+	
+	s( new Picture("imgs/new.jpg") ),
+	
+	s( 
+		new Picture("http://bbby.org/images/bibby.jpg"),
+		"me!"
 	),
-	slide( "wark", invert),
 	
+	s("javascript"),
+	s("documented"),
+	s("examples", Util.html("(this)","smallest")),
+	s("open source"),
 	
-	slide( n,n, "some sizing tests:" ,n,n),
-	slide(
-		"tiny",
-		"mediumish",
-		"not really that long"
-	),
-	slide(
-		n,
-		"some pretty long text if I do say so",
-		new Line("<small class='m50'>(worksforme)</small>", "gray")
+	s(
+		new Picture("imgs/github.png"),
+		new Picture("imgs/octocat.png")
 	),
 	
+	s(  new Picture("http://botzilla.org/botzilla.jpg")),
 	
-	slide(
-		n,n,
-		"a work in progress",
-		n,n,
-		invert
+	s( 
+		"you like it!",
+		SlideEffect.invert
 	),
-	slide("that's all." , "<small class='m30'>( Ctrl+U time? )</small>")
-];
+	
+	s( Util.cat(
+		Util.color("c", "red"),
+		Util.color("o", "darkblue"),
+		Util.color("l", "green"),
+		Util.color("o", "orange"),
+		Util.color("r", "red"),
+		Util.color("s", "darkblue")
+	)),
+	
+	s( new Picture("imgs/boston.jpg") , "pictures"),
+	
+	s( Util.html("don't have?" , "em small") ),
+	
+	s( new Picture("imgs/flickr.jpg") ),
+	
+	s( "fetched from the web" ),
+	
+	s( new Picture("imgs/dan_catt.jpg"), Util.html("(works for flickr)","tongue_in_cheek")),
+	
+	s( Lessig.flickr("guy drinking beer"), Util.html('"guy drinking beer"',"smallest") ),
+	s( Lessig.flickr("hula hoop"), Util.html('"hula hoop"',"smallest") ),
+	
+	s( "Creative Commons" ),
+	s( "non-licensed"),
+	
+	s( "amazing!" , SlideEffect.invert),
+	
+	s( "yours," ),
+	s( "free,"),
+	s( "now."),
+	s( Util.html("(anniversary gift)" , "smallest") ),
+	
+	s( 
+		Util.html("the end." , "smallest"),
+		Util.html("left = back." , "smallest"),
+		Util.html("esc = restart." , "smallest")
+	)
+);
 </script>
 </head>
 

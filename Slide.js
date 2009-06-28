@@ -4,74 +4,94 @@
 
 var Slide = function()
 {
-	this.lines=[];
-	for(var i=0; i<arguments.length; i++)
+	this.effects={};
+	this.blocktext=Util.iterator();
+	
+	Util
+	.iterator(arguments)
+	.each(function(slide)
 	{
-		this.addArg( arguments[i] );
-	}
+		slide.addArg(this);
+	},this)
+	
 };
 
 Slide.prototype={
+	// redundant for convenience methods
 	addArg:function(a)
 	{
 		if(a instanceof SlideEffect)
-			this.effects = a.effects;
+			extend(this.effects, a.effects);
 		else
-			this.addLine( a );
+			this.blocktext.push(a);
 	},
-	addLine:function(l)
-	{
-		if(
-			(l instanceof Line)==false
-		 && (l instanceof Picture)==false
-		)
-			l = new Line(l);
-		
-		this.lines.push(l);
-	},
-	
 	draw:function()
 	{
-		if( this.lines.length == 0)
+		if(this.blocktext.length==0)
 			return;
+		var c = this.make();
+		// claim some space to fetch offsetHeight
+		extend(c.style,{
+			visibility:"hidden"
+		});
 		
-		var h = Math.round( Lessig.vp.h / this.lines.length );
+		Lessig.screen.appendChild( c );
 		
-		Lessig.screen.style.lineHeight = h+"px";
+		var h = c.offsetHeight;
+		var m = Math.round( (Lessig.vp.h - h) / 2);
 		
-		extend(Lessig.screen.style, this.effects || Lessig.defaults);
+		extend(c.style,{
+			height:h+"px",
+			marginTop:m+"px",
+			marginBottom:m+"px",
+			visibility:"visible",
+			zIndex:1
+		});
+	},
+	make:function()
+	{
+		var d = document.createElement('div');
+		d.className = "slide";
+			
+		// width 80% of viewport
+		var w = Math.round( Lessig.vp.w * .8 )
+		// block margin
+		var m = Math.round((Lessig.vp.w-w)/2);
+		extend(d.style,{
+			width:w+"px",
+			marginLeft:m+"px",
+			marginRight:m+"px"
+		});
 		
-		for(var i=0; i< this.lines.length; i++)
+		var html = Util.iterator();
+		do
 		{
-			Lessig.screen.appendChild(
-				(function(l)
-				{
-					var t = document.createElement('div');
-					
-					if(l instanceof Picture)
-					{
-						extend( l.img.style ,{
-							margin:'auto'
-						});
-						t.appendChild( l.img)
-					}
-					else
-					{
-						var lenMod = Math.round(l.txt.length/8)||1;
-						extend(t.style,{
-							fontSize: Math.min( Math.round(h * Lessig.fontOffset / (lenMod/2)) , Lessig.defaults.maxSize )+"px" ,
-							whiteSpace:"nowrap"
-						});
-						t.innerHTML = l.txt;
-						
-						if(l.color)
-							t.style.color = l.color;
-					}
-					
-					return t;
-				})( this.lines[i])
-			);
-		}
+			var item = this.blocktext.current();
+			if( item instanceof Picture)
+				html.push( item.getImg() );
+			else if( item.nodeType ==1)
+				html.push( item );
+			else
+				html.push( Util.txt( item ) );
+			
+			var n = this.blocktext.next();
+			if(n)
+				html.push( Util.br() );
+		
+		}while( this.blocktext.current() != undefined)
+		
+		this.blocktext.reset();
+		
+		html.each(function()
+		{
+			d.appendChild(this);
+		});
+		
+		extend( Lessig.screen.style ,
+			this.effects.css || Lessig.defaults
+		);
+		
+		return d;
 	}
 };
 
@@ -81,3 +101,38 @@ var SlideEffect=function()
 	this.effects = {};
 	extend( this.effects, arguments[0]);
 };
+
+
+// reusable effect
+SlideEffect.invert = new SlideEffect({
+	css:{
+		backgroundColor:Lessig.defaults.color,
+		color:Lessig.defaults.backgroundColor
+	}
+});
+
+
+var Picture=function(src)
+{
+	if(typeof src == "number")
+	{
+		this.img = src;
+		return;
+	}
+	
+	this.img = (function(i)
+	{
+		i.src=src;
+		return i;
+	})(new Image)
+};
+
+Picture.prototype={
+	getImg:function()
+	{
+		if( this.img instanceof Object)
+			return this.img;
+		else if( typeof this.img == "number")
+			return Lessig.flickrs[this.img];
+	}
+}

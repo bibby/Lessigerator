@@ -3,6 +3,16 @@ The purpose being to rapidly create and edit a presentation.
 
 A basic demo @ http://bbby.org/Lessig
 
+Lawrence Lessig's site:
+http://lessig.org/
+http://twitter.com/lessig
+
+An article on the presentation style:
+http://presentationzen.blogs.com/presentationzen/2005/10/the_lessig_meth.html
+I highly recommend watching Dick Hardt's OSCON 2005 Keynote speech. 
+
+---
+
 I added this repo to share with friends and everyone else. 
 It is not my intention to suggest that this project is "finished" in any sense of the word. 
 In fact, it was just written and more or less just starting working well.
@@ -12,3 +22,25 @@ Things I'd like to do:
 - possibly Line partials for emphasized words (easier that &lt;em&gt;?)
 - slide display effects,  ( typing, puff?)
 - (small!) css class library
+
+
+## CHANGE_LOG
+
+25.6.2009	Had an itch, and started building this slideware
+
+26.6.2009	Got really hung up around a css bug that is documented at
+		http://stackoverflow.com/questions/1053329/css-text-align-bug
+		and in my share bin http://bbby.org/share/css_bug1.html
+
+27.6.2009	Worked around the bug and published a demo on github
+		http://github.com/bibby/Lessigerator
+
+28.6.2009	Watched Dick Hardt's presentation again, and now want to
+		gut the whole Slide object. I don't think I need "lines".
+		Just a single centered block. That should be less complicated.
+		---
+		Major win!
+		The need for Lines was elminated, as Items.js was removed.
+		Picture class moved to Slide.js, and a whole slew of new features.
+		Util was added as it's own file, supporting colors and formatting.
+		In desperate need of documentation!

@@ -141,7 +141,9 @@ extend.able=function(o)
 
 include.once(
 	'Color.js',
+	'Util.js',
 	'Lessig_core.js',
 	'Slide.js',
-	'Items.js'
+	'ImgSearch.js',
+	'Lessig_settings.js'
 );
