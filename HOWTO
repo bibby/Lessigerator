@@ -1,0 +1,130 @@
++-------------------------+
+| HOW TO USE Lessigerator |
++-------------------------+
+
+demo.html is currently the only example of a presentation currently
+(I'll make more). But it's good in that it uses all of the existing features.
+
+
+To begin,
+create an html page and include the Lessig.css and Lessig.js
+
+	<link rel="stylesheet" type="text/css" href="Lessig.css" />
+	<script type="text/javascript" language="javascript" src="Lessig.js"></script>
+
+There are other scripts involved, but Lessig.js loads them. I wanted to keep
+that part as easy as possible.
+
+Next, begin a new <script> to write your presentation code.
+It doesn't matter where this is done, as it waits for page load to execute.
+
+
+Lessig
+-----------------
+
+`Lessig` is a javascript object, and with it, you can add Slides.
+
+	Lessig.addSlides( new Slide() );
+
+In my demo.js,  I have only one addSlides call with a lot of arguments, but you
+don't have to do this. You can call it as many times with as many arguments
+as you'd like.
+
+Slide
+-----------------
+
+The Slides, however, should be finished before being added. I'm doing all of
+mine inline, but as you can see in the convenience method s() in that demo,
+you can add arguments to a Slide one at a time.
+
+There are three types of data Slides know what to do with:
+* plain text
+* Picture objects
+* DOM Elements
+
+Don't worry about DOM elements until we talk about the Util object.
+
+	new Slide("Hello world!");
+
+This is a perfectly good Slide. If you specifically want a line break between
+words, you can separate them in the argument list:
+
+	new Slide("first line", "second line");
+
+Slide will automatically put a break tag between them. Lines are long will break
+naturally, so this is only if you really want that line break.
+
+You can add as much to a Slide as you want, but the Lessig Method suggests
+that you keep it small.
+
+
+Picture
+-----------------
+A Picture object can be used to add an image to your slide by giving it a
+URL or relative image path.
+
+	new Slide(   new Picture("imgs/mom.png")  );
+
+These can also go on the same Slide as text or other Pictures
+
+	new Slide(   new Picture("imgs/mom.png") , "I <3 mum" );
+
+Pictures are preloaded when the presentation starts, so any waiting that may
+exist in downloading the image is spent up front at the start of your show.
+
+
+Flickr hooks
+-----------------
+By suggestion, I added hooks to Flickr.com's image search to allow the inclusion
+of an image, without explicitly having one on hand. You provide the terms,
+and hopefully an image can be found.
+
+This requires an API key, and is considered experimental.
+Safe Search is on, but check the request settings for yourself in
+ImgSearch.js to be sure they are appropriate for you.
+
+To use, call Lessig.flickr( search terms )
+
+	new Slide( Lessig.flickr("sailboat") );
+
+The call returns a Picture object, which Slide knows how to handle.
+
+Util
+-----------------
+Util is the "odd job" object, and as such is arguably the most useful.
+I'll only document the methods that an end user would want to use putting
+together a presentation.
+
+_ Util.html _
+Util.html will apply a css class to the text you give it. This wants only two
+arguments, content and classNames. classNames should appear in Lessig.css
+(which you can edit freely) or in any other stylesheet you care to add.
+You can apply multiple classes by separating the names with spaces.
+
+	new Slide( Util.html("wark!" , "uber_large italic" ) );
+
+I don't recommend you use this for color, because I've already got something
+better for that. html() returns a DOM Element that Slide knows how to handle.
+
+_ Util.color _
+This method utilizes the ColorTools project that I also have on github
+( http://github.com/bibby/ColorTools/tree/master )
+
+You can give it any css-named-color, hex, RGB or HSL (as hashes) and it
+will map to the correct color. This also returns a DOM Element.
+
+	new Slide( Util.color( "I'm blue!" , "blue" ) );
+
+_ Util.cat _
+Because the two methods above have certain expectations on what they receive,
+there are times when you want only parts of a word to have a color or class
+but not the rest.  cat ( concatenation ) brings the parts back together, so
+that Slide interprets them as a single element.
+
+	new Slide( 
+		Util.cat(
+			"I'm feeling very ",
+			Util.color("blue","darkblue"),
+			" today :("
+		)
+	);
