@@ -1,13 +1,4 @@
 Util={
-	center:function(obj)
-	{
-		extend( obj.style,{
-			position:'absolute',
-			top: Math.round( (Lessig.vp.h/2) -  (parseInt(obj.height)/2))+"px",
-			left: Math.round( (Lessig.vp.w/2) - (parseInt(obj.width)/2))+"px"
-		});
-		
-	},
 	iterator:function(obj)
 	{
 		var items=[];
