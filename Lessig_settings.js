@@ -40,4 +40,3 @@ Lessig.esc = "start";
 */
 
 ImgSearch.data.api_key = null;
-ImgSearch.data.api_key = "53416c21452062f3277c82100fce381c";
