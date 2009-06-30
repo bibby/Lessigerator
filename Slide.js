@@ -24,6 +24,7 @@ Slide.prototype={
 			extend(this.effects, a.effects);
 		else
 			this.blocktext.push(a);
+		return this;
 	},
 	draw:function()
 	{

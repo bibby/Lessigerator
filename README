@@ -14,12 +14,13 @@ I highly recommend watching Dick Hardt's OSCON 2005 Keynote speech.
 ---
 
 I added this repo to share with friends and everyone else. 
-It is not my intention to suggest that this project is "finished" in any sense of the word. 
-In fact, it was just written and more or less just starting working well.
+It is not my intention to suggest that this project is "finished" in any sense of the word.
+It is also an anniversary gift to employer and mentor John Hsu and his wife.
 
 Things I'd like to do:
 - slide display effects,  ( typing, puff?)
 - (small!) css class library
+- slide clone
 
 
 ## CHANGE_LOG
@@ -42,3 +43,12 @@ Things I'd like to do:
 		Picture class moved to Slide.js, and a whole slew of new features.
 		Util was added as it's own file, supporting colors and formatting.
 		In desperate need of documentation!
+
+29.6.2009	Made a site from an opendesigns template. v nice.
+		Coworker, TristanS, also checked in a small change that keeps
+		you on the end-slides, so that you don't do infinitely off the
+		edge. This was our first git fork-pull-push, so very exciting.
+
+30.6.2009	Setting up lessigerator.com and waiting for DNS.
+		Added "return this;" to Slide.addArg preparing for Slide.clone
+		(I've other/real work to do most of today) 
