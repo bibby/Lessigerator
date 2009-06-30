@@ -34,12 +34,18 @@ var Lessig={
 	
 	next:function()
 	{
-		this.sli++;
+		if(this.slides[ this.sli+1 ])
+			this.sli++;
+		else
+			return;
 		this.drawSlide();
 	},
 	prev:function()
 	{
-		this.sli--;
+		if(this.slides[ this.sli-1 ])
+			this.sli--;
+		else
+			return;
 		this.drawSlide();
 	},
 	start:function()
