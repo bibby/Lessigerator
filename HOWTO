@@ -55,8 +55,8 @@ words, you can separate them in the argument list:
 
 	new Slide("first line", "second line");
 
-Slide will automatically put a break tag between them. Lines are long will break
-naturally, so this is only if you really want that line break.
+Slide will automatically put a break tag between them. Lines that are long will 
+break naturally, so this is only if you really want that line break.
 
 You can add as much to a Slide as you want, but the Lessig Method suggests
 that you keep it small.

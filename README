@@ -18,8 +18,6 @@ It is not my intention to suggest that this project is "finished" in any sense o
 In fact, it was just written and more or less just starting working well.
 
 Things I'd like to do:
-- have Line styles not need much (or any html)
-- possibly Line partials for emphasized words (easier that &lt;em&gt;?)
 - slide display effects,  ( typing, puff?)
 - (small!) css class library
 
