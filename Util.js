@@ -59,7 +59,16 @@ Util={
 		s.appendChild(content instanceof Object ? content : Util.txt(content) );
 		return s;
 	},
-	
+
+	link:function(url,content)
+	{
+		var s = document.createElement('a');
+		s.href = url;
+		s.target = "lessigerator_window";
+		s.appendChild(content instanceof Object ? content : Util.txt(content) );
+		return s;
+	},
+
 	cat:function()
 	{
 		var s = document.createElement('span');
