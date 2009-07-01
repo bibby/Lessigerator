@@ -36,3 +36,11 @@
 	letter-spacing:-0.007em;
 	font-size:0.4em;
 }
+
+/* defaults */
+a:visited, a:link, a:active, a:hover
+{
+	color:gray;
+	font-size:0.75em;
+	letter-spacing:0;
+}
