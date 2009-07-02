@@ -19,7 +19,7 @@ It is not my intention to suggest that this project is "finished" in any sense o
 It is also an anniversary gift to employer and mentor John Hsu and his wife.
 
 Things I'd like to do:
-- slide display effects,  ( typing, puff?)
+- slide display effects,  ( typing, puff )
 - (small!) css class library
 - slide clone
 
@@ -53,3 +53,8 @@ Things I'd like to do:
 30.6.2009	Setting up lessigerator.com and waiting for DNS.
 		Added "return this;" to Slide.addArg preparing for Slide.clone
 		(I've other/real work to do most of today) 
+
+7.1.2009	Implemented TristanS's Util.link and related css additions.
+		Made news of the site launch, to which the reponse was
+		mostly about bugs in various browsers. Could use an investigation,
+		but personally it is second tier to features at present.
