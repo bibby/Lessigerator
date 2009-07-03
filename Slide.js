@@ -25,7 +25,26 @@ Slide.prototype={
 			extend(this.effects, a.effects);
 		else
 			this.blocktext.push(a);
+		return this;
 	},
+	
+	clone:function()
+	{
+		var s = new Slide();
+		Util
+		.iterator(['effects','blocktext','overlays'])
+		.each(function(r)
+		{
+			s[this]=(function(o)
+			{
+				var f = function(){};
+				f.prototype = o;
+				return new f();
+			})(r[this]);
+		},this);
+		return s;
+	},
+	
 	draw:function()
 	{
 		if(this.blocktext.length==0)
