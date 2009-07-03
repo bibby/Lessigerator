@@ -44,3 +44,12 @@ a:visited, a:link, a:active, a:hover
 	font-size:0.75em;
 	letter-spacing:0;
 }
+
+
+/* codeblocks */
+pre{
+	font-family:monospace;
+	font-size:30px;
+	letter-spacing:0;
+	text-align:left;
+}
