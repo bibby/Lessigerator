@@ -55,6 +55,16 @@ Things I'd like to do:
 		(I've other/real work to do most of today) 
 
 7.1.2009	Implemented TristanS's Util.link and related css additions.
-		Made news of the site launch, to which the reponse was
+		Made news of the site launch, to which the response was
 		mostly about bugs in various browsers. Could use an investigation,
 		but personally it is second tier to features at present.
+		
+7.3.2009	Added a Picture effect (used as a second arg to new Picture())
+		that appends the image front and center on your slide, overtop any
+		content that might be there. Perfect for the "No Smoking Slash",
+		Void stamps, or FAIL.
+		Added a CodeBlock object that fetches file contents via XHR and
+		displays in a pre tag.
+		Next - syntax highlights that use Color.js and maybe BBCode.
+		I want this to be something the user has to do to make their point.
+		
