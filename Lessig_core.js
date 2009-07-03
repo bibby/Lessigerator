@@ -12,12 +12,22 @@ var Lessig={
 	
 	flickrs:[],
 	fli:0,
+	fli_nag:true,
 	flickr:function(txt)
 	{
-		if(!ImgSearch || !ImgSearch.data.api_key)
+		if(!ImgSearch.data.api_key)
 		{
-			// alert("you need a Flickr API key to use the flickr feature.\nSee Lessig_settings.js");
-			return new Picture();
+			var api;
+			if(Lessig.fli_nag)
+				var api = prompt("You need a Flickr API key to use the flickr feature.\nYou set it in Lessig_settings.js\nor enter it now:");
+				
+			if(api)
+				ImgSearch.data.api_key = api;
+			else
+			{
+				Lessig.fli_nag = false;
+				return new Picture();
+			}
 		}
 		
 		ImgSearch.get(txt);
