@@ -67,6 +67,8 @@ Things I'd like to do:
 		displays in a pre tag.
 		Added colorization syntax to CodeBlocks. A little strange, but it
 		works:
-		[C:color] to start,  [:C] to end.
-		"color" can be hex or any css named color.
-		[C:purple]dinosaurs[:C]
+			[C:color] to start,  [:C] to end.
+			"color" can be hex or any css named color.
+			[C:purple]dinosaurs[:C]
+		
+		example at http://bbby.org/Lessig/site/demos/code.html
