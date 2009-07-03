@@ -10,7 +10,7 @@ CodeBlock.prototype={
 	html:function()
 	{
 		var html = document.createElement('pre');
-		html.innerHTML = this.content.replace(/\</g,'&lt;');
+		html.innerHTML = this.prepare();
 		return html;
 	},
 	
@@ -32,5 +32,21 @@ CodeBlock.prototype={
 	setContent:function(to)
 	{
 		this.content = to;
+	},
+	
+	prepare:function()
+	{
+		var content = this.content.replace(/\</g,'&lt;');
+		
+		Util.iterator( content.match(/\[C:.+\[:C\]/g))
+		.each(function()
+		{
+			var head = this.substr(0,this.indexOf(']')+1)
+			var col = head.substr(3, head.length-4);
+			content = content.replace( head , '<span style="color:'+ColorConvert.convert(col,'#hex')+'">');
+			content = content.replace("[:C]","</span>");
+		});
+		
+		return content;
 	}
 };
