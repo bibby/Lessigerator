@@ -6,6 +6,7 @@ var Slide = function()
 {
 	this.effects={};
 	this.blocktext=Util.iterator();
+	this.overlays = Util.iterator();
 	
 	Util
 	.iterator(arguments)
@@ -24,7 +25,6 @@ Slide.prototype={
 			extend(this.effects, a.effects);
 		else
 			this.blocktext.push(a);
-		return this;
 	},
 	draw:function()
 	{
@@ -48,6 +48,12 @@ Slide.prototype={
 			visibility:"visible",
 			zIndex:1
 		});
+		
+		this.overlays.each(function()
+		{
+			Util.center(this);
+			Lessig.screen.appendChild( this);
+		});
 	},
 	make:function()
 	{
@@ -64,19 +70,29 @@ Slide.prototype={
 			marginRight:m+"px"
 		});
 		
+		this.overlays=Util.iterator();
 		var html = Util.iterator();
 		do
 		{
 			var item = this.blocktext.current();
 			if( item instanceof Picture)
-				html.push( item.getImg() );
+			{
+				if(item.effect == Picture.overlay)
+				{
+					this.overlays.push(item.getImg());
+				}
+				else
+					html.push( item.getImg() );
+			}
+			else if( item instanceof CodeBlock)
+				html.push( item.html() );
 			else if( item.nodeType ==1)
 				html.push( item );
 			else
 				html.push( Util.txt( item ) );
 			
 			var n = this.blocktext.next();
-			if(n)
+			if(n && n.effect != Picture.overlay)
 				html.push( Util.br() );
 		
 		}while( this.blocktext.current() != undefined)
@@ -113,19 +129,29 @@ SlideEffect.invert = new SlideEffect({
 });
 
 
-var Picture=function(src)
+var Picture=function(src,css)
 {
+	this.effect = null;
 	if(typeof src == "number")
 	{
 		this.img = src;
-		return;
+	}
+	else
+	{
+		this.img = (function(i)
+		{
+			i.src=src;
+			return i;
+		})(new Image);
 	}
 	
-	this.img = (function(i)
+	if(css instanceof Object)
 	{
-		i.src=src;
-		return i;
-	})(new Image)
+		if( css == Picture.overlay)
+			this.effect = css;
+		else
+			extend(this.img.style, css);
+	}
 };
 
 Picture.prototype={
@@ -136,4 +162,7 @@ Picture.prototype={
 		else if( typeof this.img == "number")
 			return Lessig.flickrs[this.img];
 	}
-}
+};
+
+// just an empty object to use for arguments
+Picture.overlay={};
