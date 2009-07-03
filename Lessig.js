@@ -145,5 +145,6 @@ include.once(
 	'Lessig_core.js',
 	'Slide.js',
 	'ImgSearch.js',
+	'CodeBlock.js',
 	'Lessig_settings.js'
 );
