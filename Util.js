@@ -59,7 +59,7 @@ Util={
 		s.appendChild(content instanceof Object ? content : Util.txt(content) );
 		return s;
 	},
-
+	
 	link:function(url,content)
 	{
 		var s = document.createElement('a');
@@ -68,7 +68,7 @@ Util={
 		s.appendChild(content instanceof Object ? content : Util.txt(content) );
 		return s;
 	},
-
+	
 	cat:function()
 	{
 		var s = document.createElement('span');
@@ -89,5 +89,14 @@ Util={
 				color:col
 			});
 		return elm;
+	},
+	
+	center:function(obj)
+	{
+		extend( obj.style,{
+		position:'absolute',
+		top: Math.round( (Lessig.vp.h/2) -  (parseInt(obj.height)/2))+"px",
+		left: Math.round( (Lessig.vp.w/2) - (parseInt(obj.width)/2))+"px"
+		});
 	}
 }
