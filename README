@@ -65,6 +65,8 @@ Things I'd like to do:
 		Void stamps, or FAIL.
 		Added a CodeBlock object that fetches file contents via XHR and
 		displays in a pre tag.
-		Next - syntax highlights that use Color.js and maybe BBCode.
-		I want this to be something the user has to do to make their point.
-		
+		Added colorization syntax to CodeBlocks. A little strange, but it
+		works:
+		[C:color] to start,  [:C] to end.
+		"color" can be hex or any css named color.
+		[C:purple]dinosaurs[:C]
