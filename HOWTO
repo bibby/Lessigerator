@@ -40,13 +40,15 @@ The Slides, however, should be finished before being added. I'm doing all of
 mine inline, but as you can see in the convenience method s() in that demo,
 you can add arguments to a Slide one at a time.
 
-There are four types of data Slides know what to do with:
+There are several types of data Slides know what to do with:
 * plain text
 * Picture objects
 * DOM Elements
 * SlideEffects
+* CodeBlocks
 
-Don't worry about DOM elements until we talk about the Util object.
+Unless you are familiar with them, don't worry about DOM elements 
+until we talk about the Util object.
 
 	new Slide("Hello world!");
 
@@ -76,6 +78,12 @@ These can also go on the same Slide as text or other Pictures
 Pictures are preloaded when the presentation starts, so any waiting that may
 exist in downloading the image is spent up front at the start of your show.
 
+As an additional argument to the Picture function, you can give an "effect"
+for it as well. Currently, there is only Picture.overlay , which floats
+the image in the center of the screen on top of whatever else is on your slide.
+
+new Slide(   new Picture("imgs/mom.png", Picture.overlay )  );
+
 
 Flickr hooks
 -----------------
@@ -102,6 +110,25 @@ only one effect,  invert , which swaps the background and text colors.
 To use it, just add the effect as you would any other piece of slide data.
 
 	new Slide( "I'm inverted!" , SlideEffect.invert );
+
+CodeBlocks
+-----------------
+As the author of Lessigerator, I imagine that my presentations would have
+something to do with code or a software project most of the time. So this
+object will fetch and display code from a file. I made it very simple, just
+point at the filename.
+
+	new Slide( new CodeBlock("foo.js") );
+
+Blocks can also be colored, but the method of acheiving this is under debate.
+Currently, I'm adding tags in the file I'm fetching. Using the Color class,
+though, I can get any hex or css named color.
+	[C:{color}] to begin,  [:C] to close,  like so
+	
+	var [C:red]double[:C]=function()
+	{
+		return [C:purple]x[:C] * 2;
+	}
 
 
 Util
