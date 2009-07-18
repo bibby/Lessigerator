@@ -180,14 +180,6 @@ var Lessig={
 		var s = document.createElement('span');
 		s.className = "progress";
 		s.innerHTML = "Slide "+(this.sli+1)+" of "+this.slides.length;
-		extend(s.style,{
-			position:'absolute',
-			top:"5px",
-			left:"5px",
-			fontSize:"14px",
-			zIndex:10
-		});
-		
 		Lessig.screen.appendChild(s);
 	},
 	
