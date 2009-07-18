@@ -185,6 +185,7 @@ var Lessig={
 	
 	splitIntoSlides:function(str,delim,replaces)
 	{
+		delim = delim || " ";
 		Util
 		.iterator( str.split(new RegExp(delim)) )
 		.each(function()
