@@ -170,3 +170,36 @@ that Slide interprets them as a single element.
 			" today :("
 		)
 	);
+	
+Convenience methods
+-------------------
+If you know that you want several slides containing one to few words each in
+a row, you can save time by calling Lessig.splitIntoSlides. There are 3 args,
+but only one is required.
+
+	Lessig.splitIntoSlides( string , delimiter, replace_hash);
+
+This code will add 6 slides:
+
+	Lessig.splitIntoSlides("each word will become a slide");
+
+If you want, you can choose a different delimiter, but please not that escape
+characters should be doubly escaped, especially if they have RegExp meaning.
+This will make three slides.
+
+	Lessig.splitIntoSlides("one|two|three","\\|");
+
+The third argument accepts an object ({}) of key:value pairs that are applied
+as "clean up" to the parts. This allows you to do things like split the
+string on spaces, but still have spaces on each slide. Be aware that escaped
+characters as keys should be doubly escaped here as well. You can have any
+number of replacements applied to each part.
+This code will net two slides.
+
+	var delim = " "; // split on spaces
+	var replace = { "\\|" : " "}; // after split, replace pipes with spaces.
+	Lessig.splitIntoSlides("winner|winner chicken|dinner");
+	
+however it is easier to do the same thing as:
+
+	Lessig.splitIntoSlides("winner winner|chicken dinner","\\|");

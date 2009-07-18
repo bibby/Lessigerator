@@ -72,3 +72,8 @@ Things I'd like to do:
 			[C:purple]dinosaurs[:C]
 		
 		example at http://bbby.org/Lessig/site/demos/code.html
+7.18.2009	Fixed an issue with the presentation progress indicator: it was
+		using a negative letter spacing that made it appear to writing
+		right to left.
+		Added splitIntoSlides method to Lessig, to more easily make many slides
+		from a long string. A time saver mostly.
