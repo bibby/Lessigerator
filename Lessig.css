@@ -27,6 +27,11 @@
 	font-weight:bold;
 }
 
+/* progress indocator */
+.progress{
+	letter-spacing:0;
+}
+
 
 /* sets */
 .tongue_in_cheek
