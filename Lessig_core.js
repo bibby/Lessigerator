@@ -178,6 +178,7 @@ var Lessig={
 	showProgress:function()
 	{
 		var s = document.createElement('span');
+		s.className = "progress";
 		s.innerHTML = "Slide "+(this.sli+1)+" of "+this.slides.length;
 		extend(s.style,{
 			position:'absolute',
@@ -188,6 +189,20 @@ var Lessig={
 		});
 		
 		Lessig.screen.appendChild(s);
+	},
+	
+	splitIntoSlides:function(str,delim,replaces)
+	{
+		Util
+		.iterator( str.split(new RegExp(delim)) )
+		.each(function()
+		{
+			var s = this;
+			if(replaces instanceof Object)
+				for(var r in replaces)
+					s = s.replace(new RegExp(r,"g"),replaces[r]);
+			Lessig.addSlides( new Slide( s ) );
+		})
 	}
 };
 
