@@ -91,6 +91,9 @@ Slide.prototype={
 		
 		this.overlays=Util.iterator();
 		var html = Util.iterator();
+		var noBreak = this.effects.breaks == "noBreak" || false;
+		
+		
 		do
 		{
 			var item = this.blocktext.current();
@@ -111,7 +114,7 @@ Slide.prototype={
 				html.push( Util.txt( item ) );
 			
 			var n = this.blocktext.next();
-			if(n && n.effect != Picture.overlay)
+			if(n && n.effect != Picture.overlay && !noBreak)
 				html.push( Util.br() );
 		
 		}while( this.blocktext.current() != undefined)
@@ -139,12 +142,16 @@ var SlideEffect=function()
 };
 
 
-// reusable effect
+// reusable effects
 SlideEffect.invert = new SlideEffect({
 	css:{
 		backgroundColor:Lessig.defaults.color,
 		color:Lessig.defaults.backgroundColor
 	}
+});
+
+SlideEffect.noBreak = new SlideEffect({
+	breaks:"noBreak"
 });
 
 
@@ -160,6 +167,7 @@ var Picture=function(src,css)
 		this.img = (function(i)
 		{
 			i.src=src;
+			i.align="center";
 			return i;
 		})(new Image);
 	}
