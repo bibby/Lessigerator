@@ -105,11 +105,18 @@ The call returns a Picture object, which Slide knows how to handle.
 SlideEffects
 -----------------
 SlideEffect is a class that adds temporary alterations to the screen style.
-( Lessig.screen == document.body ). At the time of this writing, there is
-only one effect,  invert , which swaps the background and text colors.
-To use it, just add the effect as you would any other piece of slide data.
+( Lessig.screen == document.body ). To use them, just add the effect as 
+you would any other piece of slide data. First, last, or middle doesn't matter.
 
+SlideEffect.invert swaps the background and text colors.
 	new Slide( "I'm inverted!" , SlideEffect.invert );
+	
+SlideEffect.noBreak tells the slide not to break items onto their own lines.
+	new Slide(
+		"I'm with stupid",
+		new Picture("right_arrow.png"),
+		SlideEffect.noBreak
+	);
 
 CodeBlocks
 -----------------
