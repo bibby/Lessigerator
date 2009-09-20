@@ -79,7 +79,7 @@ include.prototype={
 			arg=arguments[i];
 			if(this.d(arg))
 				continue args;
-			include(arg);
+			document.write('<scr'+'ipt src="'+this.parseURL(arg)+'"></scr'+'ipt>');
 		}
 	}
 };
