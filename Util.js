@@ -52,10 +52,20 @@ Util={
 		return document.createTextNode(t);
 	},
 	
-	html:function(content,className)
+	html:function(content /*,className [,className]*/)
 	{
-		var s = document.createElement('span');
-		s.className = className;
+		var s = document.createElement('span'),
+			cls=[],
+			args=Util.iterator(arguments);
+		
+		args.shift();
+		args.each(function()
+		{
+			cls.push(this);
+		});
+		
+		s.className = cls.join(' ');
+		
 		s.appendChild(content instanceof Object ? content : Util.txt(content) );
 		return s;
 	},
