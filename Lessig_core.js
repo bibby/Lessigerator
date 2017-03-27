@@ -108,7 +108,7 @@ var Lessig={
 			backgroundColor:Lessig.defaults.backgroundColor
 		});
 		
-		window.onkeypress = function(e)
+		window.onkeydown = function(e)
 		{
 			if(!e) e = event;
 			var key=(e.keyCode)?e.keyCode:0;
